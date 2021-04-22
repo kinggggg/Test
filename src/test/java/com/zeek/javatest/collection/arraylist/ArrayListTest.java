@@ -11,6 +11,13 @@ import java.util.*;
 public class ArrayListTest {
 
     @Test
+    public void removeTest() {
+        List<Integer> integers = new ArrayList<>();
+        integers.remove(-1);
+
+    }
+
+    @Test
     public void copyTest2() {
 
         int[] source = new int[2];
