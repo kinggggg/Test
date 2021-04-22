@@ -10,6 +10,36 @@ import java.util.*;
  */
 public class ArrayListTest {
 
+    @Test
+    public void copyTest2() {
+
+        int[] source = new int[2];
+        source[0] = 1;
+        source[1] = 2;
+
+        int[] target;
+        target = Arrays.copyOf(source, 2);
+        target[0]=3;
+
+        System.out.println(source[0]);
+
+    }
+
+    @Test
+    public void copyTest() {
+        Person p1 = new Person(10, "tom");
+        Person p2 = new Person(20, "jerry");
+        Person[] source = new Person[2];
+        source[0] = p1;
+        source[1] = p2;
+
+        Person[] target;
+        target = Arrays.copyOf(source, 2);
+        target[0].setAge(30);
+
+        System.out.println(source[0].getAge());
+
+    }
 
     @Test
     public void sizeTest() throws Exception {

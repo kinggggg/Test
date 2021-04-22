@@ -24,6 +24,14 @@ public class Person implements Cloneable{
         return name;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return (Person)super.clone();
