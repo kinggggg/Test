@@ -11,6 +11,21 @@ import java.util.*;
 public class ArrayListTest {
 
     @Test
+    public void removeTest2() {
+        List<Integer> integers = new ArrayList<>();
+        integers.add(0);
+        integers.add(1);
+        integers.add(2);
+
+        Iterator<Integer> it = integers.iterator();
+        while (it.hasNext()) {
+            Integer next = it.next();
+            System.out.println(next);
+            integers.add(3, 3);
+        }
+    }
+
+    @Test
     public void removeTest() {
         List<Integer> integers = new ArrayList<>();
         integers.remove(-1);
