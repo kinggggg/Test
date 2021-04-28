@@ -32,6 +32,7 @@ public class ArrayListTest {
 
     }
 
+    // 数组拷贝: 如果数组中是对象的话, 数组拷贝的也是数组中对象的引用
     @Test
     public void copyTest2() {
 
