@@ -2,13 +2,26 @@ package com.zeek.javatest.collection.arraylist;
 
 import com.zeek.javatest.domain.User;
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by weibo_li on 2017/4/25.
  */
 public class ArrayListTest {
+
+    @Test
+    public void name() {
+        String url = "http://www.baidu.com/atc?test=a";
+        Pattern pattern = Pattern.compile("http.*?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\\.?");
+        Matcher matcher = pattern.matcher(url);
+        String s = matcher.replaceFirst("");
+        System.out.println(s);
+
+    }
 
     @Test
     public void removeTest2() {
