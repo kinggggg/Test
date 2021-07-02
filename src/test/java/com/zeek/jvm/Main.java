@@ -6,13 +6,17 @@ package com.zeek.jvm;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
 
         Integer i = 127;
         Integer j = 127;
 
         System.out.println(i == j);
+
+        while (true) {
+            Thread.sleep(1000);
+        }
 
     }
 }
