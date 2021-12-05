@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by weibo_li on 2017/5/26.
@@ -32,6 +33,12 @@ public class LambadaTest {
         public void setStringType(String stringType) {
             this.stringType = stringType;
         }
+    }
+
+    @Test
+    public void filterTest() {
+        List<String> collect = Stream.of("aa", "bb").filter(ele -> ele.equals("cc")).filter(ee -> ee.equals("dd")).collect(Collectors.toList());
+        System.out.println(collect);
     }
 
     @Test
