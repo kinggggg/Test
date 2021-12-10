@@ -3,14 +3,12 @@ package com.zeek.javatest.completablefuture;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
  * Created by weibo_li on 2017/2/14.
- *
  */
 public class CompletableFutureTest {
 
@@ -34,13 +32,13 @@ public class CompletableFutureTest {
 
     @BeforeClass
     public static void initShops() {
-        shops = Arrays. asList( new Shop(" BestPrice"), new Shop(" LetsSaveBig"), new Shop(" MyFavoriteShop"), new Shop(" BuyItAll"));
+        shops = Arrays.asList(new Shop(" BestPrice"), new Shop(" LetsSaveBig"), new Shop(" MyFavoriteShop"), new Shop(" BuyItAll"));
     }
 
     @Test
     public void testGetPriceAsync() throws Exception {
-        /*CompletableFuture<Double> futurePrice = this.getPriceAsync("product-name");
-        System.out.println(futurePrice.get());*/
+        CompletableFuture<Double> futurePrice = this.getPriceAsync("product-name");
+        System.out.println(futurePrice.get());
 
         long start = System.currentTimeMillis();
         System.out.println(this.findPrices3("product-name"));
@@ -71,34 +69,33 @@ public class CompletableFutureTest {
         System.out.println(Runtime.getRuntime().availableProcessors());
     }
 
-    public List< String> findPrices0(
+    public List<String> findPrices0(
             String product) {
-        return shops.stream().map( shop ->
-                CompletableFuture. supplyAsync( () -> shop.getName() + " price is " + shop.calculatePrice( product))).map( CompletableFuture:: join).collect(Collectors.toList());
+        return shops.stream().map(shop ->
+                CompletableFuture.supplyAsync(() -> shop.getName() + " price is " + shop.calculatePrice(product))).map(CompletableFuture::join).collect(Collectors.toList());
 
     }
 
-    public List< String> findPrices1(
+    public List<String> findPrices1(
             String product) {
-        return shops.parallelStream().map( shop ->
-                CompletableFuture. supplyAsync( () -> shop.getName() + " price is " + shop.calculatePrice( product))).map( CompletableFuture:: join).collect(Collectors.toList());
+        return shops.parallelStream().map(shop ->
+                CompletableFuture.supplyAsync(() -> shop.getName() + " price is " + shop.calculatePrice(product))).map(CompletableFuture::join).collect(Collectors.toList());
 
     }
 
-    public List< String> findPrices2(
+    public List<String> findPrices2(
             String product) {
-        List< CompletableFuture< String>> priceFutures = shops. stream().map( shop ->
-                CompletableFuture. supplyAsync( () -> shop.getName() + " price is " + shop.calculatePrice( product))) .collect( Collectors. toList());
-        return priceFutures. stream() .map( CompletableFuture:: join).collect(Collectors.toList());
+        List<CompletableFuture<String>> priceFutures = shops.stream().map(shop ->
+                CompletableFuture.supplyAsync(() -> shop.getName() + " price is " + shop.calculatePrice(product))).collect(Collectors.toList());
+        return priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
 
-    public List< String> findPrices3(
+    public List<String> findPrices3(
             String product) {
-        List< CompletableFuture< String>> priceFutures = shops.parallelStream().map( shop ->
-                CompletableFuture. supplyAsync( () -> shop.getName() + " price is " + shop.calculatePrice( product), executer)).collect( Collectors. toList());
-        return priceFutures. stream() .map( CompletableFuture:: join).collect(Collectors.toList());
+        List<CompletableFuture<String>> priceFutures = shops.parallelStream().map(shop ->
+                CompletableFuture.supplyAsync(() -> shop.getName() + " price is " + shop.calculatePrice(product), executer)).collect(Collectors.toList());
+        return priceFutures.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
-
 
 
     //同步计算价格方法
@@ -107,10 +104,10 @@ public class CompletableFutureTest {
     }
 
     //异步计算价格方法
-    public CompletableFuture<Double> getPriceAsync(String product) throws Exception{
+    public CompletableFuture<Double> getPriceAsync(String product) throws Exception {
 
         CompletableFuture<Double> futurePrice = new CompletableFuture<>();
-        new Thread( () -> {
+        new Thread(() -> {
             double price = shop.calculatePrice(product);
             futurePrice.complete(price);
         }).start();
@@ -121,3 +118,4 @@ public class CompletableFutureTest {
     }
 
 }
+
