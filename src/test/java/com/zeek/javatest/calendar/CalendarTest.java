@@ -22,7 +22,6 @@ public class CalendarTest {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-
         Date date = new Date();
         System.out.println("当前的时间为：" + sdf.format(date));
 
