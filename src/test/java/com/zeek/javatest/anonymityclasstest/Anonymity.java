@@ -9,6 +9,9 @@ package com.zeek.javatest.anonymityclasstest;
  **/
 public class Anonymity {
 
+
+    
+
     public static void main(String[] args) {
 
         new Runnable(){
