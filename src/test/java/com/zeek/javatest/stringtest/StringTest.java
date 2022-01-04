@@ -13,6 +13,26 @@ import java.util.List;
 public class StringTest {
 
     @Test
+    public void trim() throws InterruptedException {
+        String str = " a bc " ;
+        String s = trimRight(str);
+        System.out.println(s);
+    }
+
+    /**
+     * 去右空格
+     * @param str
+     * @return
+     */
+    public String trimRight(String str) {
+        if (str == null || str.equals("")) {
+            return str;
+        } else {
+            return str.replaceAll("[ ]+$", "");
+        }
+    }
+
+    @Test
     public void arrayTest() {
 
         String[] str = ".".split("\\.");

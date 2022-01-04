@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -19,26 +20,6 @@ import java.util.stream.Collectors;
  * Created by weibo_li on 2017/4/25.
  */
 public class DateTest {
-
-    @Test
-    public void trim() throws InterruptedException {
-        String str = " a bc " ;
-        String s = trimRight(str);
-        System.out.println(s);
-    }
-
-    /**
-     * 去右空格
-     * @param str
-     * @return
-     */
-    public String trimRight(String str) {
-        if (str == null || str.equals("")) {
-            return str;
-        } else {
-            return str.replaceAll("[ ]+$", "");
-        }
-    }
 
     @Test
     public void stopWatch() throws InterruptedException {
@@ -97,13 +78,6 @@ public class DateTest {
     }
 
     @Test
-    public void test4() {
-
-        System.out.println(LocalDateTime.now());
-
-    }
-
-    @Test
     public void test3() {
         System.out.println(System.currentTimeMillis());
         System.out.println(this.parseTimeStamp2DateString(System.currentTimeMillis()));
@@ -122,19 +96,30 @@ public class DateTest {
     }
 
     @Test
-    public void test2() {
-
-        System.out.println(System.currentTimeMillis());
-    }
-
-    @Test
     public void test1() {
 
         Date date1 = new Date();
         Date date2 = new Date();
-
-
-
         System.out.println(date1 == date2);
+        System.out.println(date1);
+        System.out.println("----------1");
+        System.out.println();
+
+        LocalDateTime local = LocalDateTime.now();
+        System.out.println(local.toLocalDate());
+        System.out.println(local.toLocalTime());
+        ZoneId zoneId = ZoneId.of("Europe/Rome");
+        ZonedDateTime zonedDateTime =  local.atZone(zoneId);
+        System.out.println(zonedDateTime);
+        System.out.println("----------2");
+        System.out.println();
+
+        Instant instant = Instant.now();
+        System.out.println(instant.toEpochMilli());
+        System.out.println("----------3");
+        System.out.println();
+
+        
+        
     }
 }
