@@ -28,6 +28,6 @@ public class Teacher3 implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return 1;
+        return -1;
     }
 }

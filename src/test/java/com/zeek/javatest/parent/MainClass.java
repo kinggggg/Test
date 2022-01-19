@@ -1,5 +1,7 @@
 package com.zeek.javatest.parent;
 
+import org.junit.Test;
+
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -22,5 +24,21 @@ public class MainClass {
         treeSet.add(teacher3);
         treeSet.add(teacher31);
         System.out.println(treeSet);
+    }
+
+    @Test
+    public void treeSet() {
+        Teacher3 t1 = new Teacher3("a");
+        Teacher3 t2 = new Teacher3("b");
+        Teacher3 t3 = new Teacher3("c");
+
+        Set<Teacher3> treeSet = new TreeSet<>();
+        treeSet.add(t1);
+        treeSet.add(t2);
+        treeSet.add(t3);
+
+        for (Teacher3 t : treeSet) {
+            System.out.println(t.getName());
+        }
     }
 }
