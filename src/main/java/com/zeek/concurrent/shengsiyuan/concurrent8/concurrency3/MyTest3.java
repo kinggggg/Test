@@ -29,7 +29,7 @@ package com.zeek.concurrent.shengsiyuan.concurrent8.concurrency3;
  * 互斥锁的属性:
  * 1. PTHREAD_MUTEX_TIMED_NP: 这是缺省值, 也就是普通锁. 当一个线程加锁以后, 其余请求锁的线程将会形成一个等待队列, 并且在解锁后按照优先级获取到锁. 这种策略可以确保资源分配的公平性
  * 2. PTHREAD_MUTEX_RECURSIVE_NP: 嵌套锁(也就是 可重入锁). 允许同一个线程对同一个锁成功获取多次, 并通过unlock解锁(获取了几次锁, 就需要调用同样次数的unlock方法). 如果是不同线程的请求, 则在加锁线程解锁时重新进行竞争
- * 3. PTHREAD_MUTEX_ERRORCHECK_NP: 检错锁. 如果同一个线程请求同一个锁，则返回EDEADLK, 否则与 PTHREAD_MUTEX_TIMED_NP 类型动作相同, 这样就保证了当不允许多次加锁时不会出现最简单清下的死锁(即, 这样就保证了当允许多次加锁时会出现最简单清下的死锁)
+ * 3. PTHREAD_MUTEX_ERRORCHECK_NP: 检错锁. 如果同一个线程请求同一个锁，则返回EDEADLK, 否则与 PTHREAD_MUTEX_TIMED_NP 类型动作相同, 这样就保证了当不允许多次加锁时不会出现最简单情况下的死锁(即, 这样就保证了当允许多次加锁时会出现最简单情况下的死锁)
  * 4. PTHREAD_MUTEX_ADAPTIVE_NP: 适应锁. 动作最简单的锁类型, 仅仅等待解锁后重新竞争
  *
  *
