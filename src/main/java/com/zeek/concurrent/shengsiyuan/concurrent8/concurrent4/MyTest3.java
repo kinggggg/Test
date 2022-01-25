@@ -20,9 +20,8 @@ package com.zeek.concurrent.shengsiyuan.concurrent8.concurrent4;
  * 1. 确保变量在内存中的可见性
  * 2. 防止指令重排序
  *
- * volatile可以确保对变量写操作的原子性，但不具备排他性？？？
- * （这里的说法我有异议。因为通常所理解到的是volatile修饰的变量不具备原子性只具备可见性）
- * 视频中所说的原子性指的是这样的赋值：
+ * volatile可以确保对变量写操作的原子性，但不具备排他性
+ * 注意！！！视频中所说的原子性指的是这样的赋值：
  * volatile int count = 1;
  * volatile boolean flag = false;
  * 而下面的代码是不具备原子性的：
