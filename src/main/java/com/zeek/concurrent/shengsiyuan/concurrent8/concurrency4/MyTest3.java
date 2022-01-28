@@ -1,4 +1,4 @@
-package com.zeek.concurrent.shengsiyuan.concurrent8.concurrent4;
+package com.zeek.concurrent.shengsiyuan.concurrent8.concurrency4;
 
 /**
  * volatile关键字

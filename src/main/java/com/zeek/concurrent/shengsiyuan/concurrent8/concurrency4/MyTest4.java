@@ -1,4 +1,4 @@
-package com.zeek.concurrent.shengsiyuan.concurrent8.concurrent4;
+package com.zeek.concurrent.shengsiyuan.concurrent8.concurrency4;
 
 /**
  * Java内存模型（Java Memory Model，jMM）以及happen-before原则
