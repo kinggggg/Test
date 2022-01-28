@@ -34,6 +34,39 @@ package com.zeek.concurrent.shengsiyuan.concurrent8.concurrent4;
  * 因为这行代码其实涉及到两步操作，第一步是在堆上生成Date对象，第二步把这个Date对象的引用赋值给date变量。
  * 而只有第二步的这个赋值操作才具备原子性。
  *
+ * int a = 1;
+ * String s = "hello";
+ * 内存屏障（Release Barrier，释放屏障）：  防止下面的volatile与上面的所有操作的指令重排序
+ * volatile boolean v = false; //volatile变量的写入操作
+ * 内存屏障（Store Barrier，存储屏障）：    重要的作用是刷新处理器缓存，结果是可以确保该存储屏障之前一切的操作所
+ *                                     生成的结果对于其他处理器来说都可见
+ *
+ * 如果是对volatile类型的变量进行写入操作的话，JVM会进行如下的行为：
+ * 1. 在volatile变量写操作前插入Release Barrier
+ * 2. 在volatile变量写操作后插入Store Barrier
+ *
+ * 内存屏障（Load Barrier，加载屏障）:     可以刷新处理器缓存，同步其他处理器对该volatile变量的修改结果
+ * boolean v1 = v;
+ * 内存屏障（Acquire Barrier，获取屏障）：  可以防止上面的volatile读取操作与下面的所有操作语句的指令重排序
+ * int a = 1;
+ * String s = "hello";
+ *
+ * 对于volatile变量的读写操作，本质上都是通过内存屏障来执行的。
+ *
+ * 内存屏障兼具了两方面能力：1. 防止指令重排；2. 实现变量内存的可见性
+ * 1. 对于修改操作来说，volatile可以去吧该操作与其上面的所有读写操作都不会进行指令重排
+ * 2. 对于读取操作来说，volatile可以确保该操作与其后续的所有读写操作都不会进行指令重排
+ *
+ * volatile与锁的一些比较：
+ * 锁同样具备变量内存可见性与防止指令重排功能，但是锁还具备volatile变量所不具备一个能力，锁可以保证排他性，即，
+ * 在同一时刻锁能保证只有一个线程对共享变量的访问
+ *
+ * 锁本质的实现方式：
+ * monitorenter
+ * 内存屏障（Acquire Barrier，获取屏障）
+ * ...业务代码...
+ * 内存屏障（Release Barrier，释放屏障）
+ * monitorexit
  *
  *
  * @ClassName MyTest3
