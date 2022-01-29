@@ -19,7 +19,7 @@ public class MyTest2_1 {
             System.out.println("task finished");
         });
         /*
-            如果不使用 CompletableFuture 的 whenComplete，而使用Future的get方法的话，get方法会阻塞住main
+            如果不使用 CompletableFuture 的 whenComplete，而使用Future的实现类 FutureTask 的get方法的话，get方法会阻塞住main
             线程！而 whenComplete 方法不会阻塞住main线程的执行！这就是 CompletableFuture 比 Future 的优势所在！
          */
         completableFuture.whenComplete((t, action) -> System.out.println("执行完成！"));
