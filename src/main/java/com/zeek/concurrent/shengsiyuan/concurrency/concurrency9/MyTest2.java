@@ -7,6 +7,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
+ * 对于线程池来说，其提供了execute与submit两种方式来向线程池提交任务
+ * 总体来说，submit方法是可以取代execute方法的，因为它既可以接收Callable任务，也可以接收Runnable任务
+ *
+ * 关于线程池的总体执行策略：
+ * 1. 如果线程池中正在执行的线程数 < corePoolSize，那么线程池就会优先选择创建新的线程而非将提交的任务加到阻塞队列中
+ * 2. 如果线程池中正在执行的线程数 >= corePoolSize，那么线程池就会优先选择对提交的任务进行阻塞排队而非创建新的线程
+ * 3. 如果提交的任务无法加入阻塞队列当中，那么线程池就会创建新的线程；如果创建的线程数超过了maximumPoolSize，那么拒绝策略就会起作用
+ *
  * @author liweibo03 <liweibo03@kuaishou.com>
  * Created on 2022-02-07
  */
