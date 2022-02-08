@@ -1,4 +1,4 @@
-package com.zeek.concurrent.shengsiyuan.concurrency.从currency8;
+package com.zeek.concurrent.shengsiyuan.concurrency.concurrency8;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
