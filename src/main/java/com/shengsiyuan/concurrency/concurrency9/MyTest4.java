@@ -38,7 +38,7 @@ public class MyTest4 {
             });
         });
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             int result = completionService.take().get();
             System.out.println(result);
         }
