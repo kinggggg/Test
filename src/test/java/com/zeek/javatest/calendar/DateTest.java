@@ -1,4 +1,4 @@
-package com.zeek.javatest.date;
+package com.zeek.javatest.calendar;
 
 import com.google.common.base.Stopwatch;
 import org.apache.commons.codec.digest.DigestUtils;
