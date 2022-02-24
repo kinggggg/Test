@@ -1,17 +1,14 @@
 package com.zeek.reactor;
 
-import javafx.scene.input.DataFormat;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.function.Consumer;
+
 import org.junit.Test;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.SynchronousSink;
-
-import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author liweibo03 <liweibo03@kuaishou.com>
