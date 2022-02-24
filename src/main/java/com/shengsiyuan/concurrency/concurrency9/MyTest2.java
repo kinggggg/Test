@@ -23,8 +23,14 @@ import java.util.stream.IntStream;
  * 1. RUNNING：线程池可以接收新的任务提交，并且还可以正常处理阻塞队列中的任务
  * 2. SHUTDOWN: 不再接收新的提交任务，不过线程池可以继续处理阻塞队列中的任务
  * 3. STOP: 不再接收新的提交任务，同时还会丢弃阻塞队列中的既有任务；此外，它还会中断正在处理中的任务
- * 4. TIDYING: 所有的任务都执行完毕后（同时也涵盖了阻塞队列中的任务），当前线程池中的活动的线程数量降为0，将会调用terminated方法
+ * 4. TIDYING: 所有的任务都执行完毕后（同时也涵盖了阻塞队列中的任务），当前线程池中的活动的线程数量降为0
+ *    （当初始化线程池指定的corePoolSize不为0时，线程池中活动的线程数量不可能为0吧?！），将会调用terminated方法
  * 5. TERMINATED: 线程池的终止状态，当terminated方法执行完毕后，线程池将会处于该状态下
+ *
+ * RUNNING -> SHUTDOWN: 当调用了线程池的shutdown方法时，或者finalize方法被隐式调用后（该方法内部会调用shutdown方法）
+ * RUNNING, SHUTDOWN -> STOP: 当调用了线程池的shutdownNow方法时
+ * SHUTDOWN -> TIDYING：在线程池与阻塞队列均变为空时
+ * STOP -> TIDYING：在线程池变为空时
  *
  * @author liweibo03 <liweibo03@kuaishou.com>
  * Created on 2022-02-07
