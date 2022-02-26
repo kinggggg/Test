@@ -11,9 +11,13 @@ public class ReturnTest {
 
     public static void main(String[] args) {
 
-
-        int call = ReturnTest.call();
-        System.out.println(call);
+        // 为什么输出的还是负值？
+        int i = -2147483648;
+        int j = -i;
+        int q = Math.abs(i);
+        System.out.println(i);
+        System.out.println(j);
+        System.out.println(q);
 
     }
 

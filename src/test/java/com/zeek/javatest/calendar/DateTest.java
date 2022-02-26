@@ -1,10 +1,5 @@
 package com.zeek.javatest.calendar;
 
-import com.google.common.base.Stopwatch;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -12,9 +7,19 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
+import org.springframework.util.DigestUtils;
+
+import com.google.common.base.Stopwatch;
 
 /**
  * Created by weibo_li on 2017/4/25.
@@ -36,18 +41,6 @@ public class DateTest {
 
     }
 
-    @Test
-    public void md5Test() {
-        Set<Integer> ids = new HashSet<>();
-        ids.add(12);
-        ids.add(10);
-        ids.add(13);
-        List<Integer> collect = ids.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        String raw = StringUtils.join(collect, ",");
-        String r = DigestUtils.md5Hex(raw);
-        System.out.println(r.length());
-        System.out.println(r);
-    }
 
     @Test
     public void sort() {
