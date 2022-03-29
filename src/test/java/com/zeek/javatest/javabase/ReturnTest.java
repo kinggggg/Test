@@ -1,5 +1,9 @@
 package com.zeek.javatest.javabase;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @ClassName ReturnTest
  * @Description return执行时机
@@ -18,6 +22,21 @@ public class ReturnTest {
         System.out.println(i);
         System.out.println(j);
         System.out.println(q);
+
+        LinkedList<LinkedList<Integer>> list = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        path.add(1);
+        path.add(2);
+        LinkedList<Integer> path2 = new LinkedList<>();
+        path2.add(3);
+        path2.add(4);
+        // [[1, 2], [3, 4]]
+        list.add(path);
+        list.add(path2);
+        // [[1, 2], [3, 4]]
+        list.add(new LinkedList(path));
+        list.add(new LinkedList(path2));
+        System.out.println(list);
 
     }
 
