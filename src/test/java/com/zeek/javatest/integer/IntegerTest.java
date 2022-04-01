@@ -12,6 +12,21 @@ import org.junit.Test;
 public class IntegerTest {
 
     @Test
+    public void integerTest() throws Exception {
+
+        // 为什么输出的还是负值？
+        //
+        int i = -2147483648;
+        int j = -i;
+        int q = Math.abs(i);
+        System.out.println(i);
+        System.out.println(j);
+        System.out.println(q);
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Integer.MAX_VALUE);
+    }
+
+    @Test
     public void test04() {
         Integer i = 127;
         Integer j = 127;
