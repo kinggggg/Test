@@ -11,31 +11,16 @@ public class CompareNumber<T extends Number> extends BaseMatcher<T> {
 
     private final T value;
 
-    private final boolean great;
+    private final Compare<T> COMPARE;
 
     public CompareNumber(T value, boolean great) {
         this.value = value;
-        this.great = great;
+        COMPARE = new DefaultNumberCompare<>(great);
     }
 
     @Override
     public boolean matches(Object actual) {
-        Class<?> clazz = actual.getClass();
-        if (clazz == Integer.class) {
-            return great ? (Integer) actual > (Integer) value : (Integer) actual < (Integer) value;
-        } else if (clazz == Short.class) {
-            return great ? (Short) actual > (Short) value : (Short) actual < (Short) value;
-        } else if (clazz == Byte.class) {
-            return great ? (Byte) actual > (Byte) value : (Byte) actual < (Byte) value;
-        } else if (clazz == Double.class) {
-            return great ? (Double) actual > (Double) value : (Double) actual < (Double) value;
-        } else if (clazz == Float.class) {
-            return great ? (Float) actual > (Float) value : (Float) actual < (Float) value;
-        } else if (clazz == Long.class) {
-            return great ? (Long) actual > (Long) value : (Long) actual < (Long) value;
-        } else {
-            throw new AssertionError("The number type " + clazz + " not supported");
-        }
+        return COMPARE.compare(value, (T) actual);
     }
 
     @Factory
