@@ -81,6 +81,25 @@ public class CalendarTest {
         System.out.println(days);
     }
 
+    @Test
+    public void name() throws ParseException {
+        int expiringSoonDayCount = -334;//即将过期
+
+        int expiringDayCount = -364;//当天过期
+
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String time = sf.format(new Date());
+        Date timeNow = sf.parse(time);
+        Calendar c = Calendar.getInstance();
+        c.setTime(timeNow);
+        c.add(Calendar.DAY_OF_MONTH, expiringSoonDayCount);
+        String expiringSoonDate = sf.format(c.getTime());
+        c.setTime(timeNow);
+
+
+    }
+
     long until(LocalDate endDate){
         return LocalDate.now().until(endDate, ChronoUnit.DAYS);
     }
