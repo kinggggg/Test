@@ -2,10 +2,7 @@ package com.zeek.javatest.completablefuture;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import org.junit.BeforeClass;
@@ -15,6 +12,52 @@ import org.junit.Test;
  * Created by weibo_li on 2017/2/14.
  */
 public class CompletableFutureTest {
+
+    @Test
+    public void name() throws ExecutionException, InterruptedException {
+
+        CompletableFuture<Integer> c1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep1");
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println("1");
+            return 1;
+        });
+        CompletableFuture<Integer> c2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep2");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println("2");
+            return 2;
+        });
+        CompletableFuture<Integer> c3 = CompletableFuture.supplyAsync(() -> 3);
+        CompletableFuture<Integer> c4 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep4");
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 4;
+        });
+
+        CompletableFuture.allOf(c1, c2, c3, c4);
+
+        System.out.println(c1.get());
+        System.out.println(c2.get());
+        System.out.println(c3.get());
+        System.out.println(c4.get());
+
+    }
 
     private static Shop shop = null;
 
