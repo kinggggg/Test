@@ -14,6 +14,19 @@ import java.util.regex.Pattern;
 public class ArrayListTest {
 
     @Test
+    public void removeAllTest() {
+        List<String> list1 = new ArrayList<>();
+        list1.add("https://pic3.58cdn.com.cn/p1/big/n_v27f82a9ee3c1b43849d6422187d4c593b.jpg");
+        list1.add("https://pic3.58cdn.com.cn/p1/big/n_v27f82a9ee3c1b43849d6422187d4c593b.jpg2");
+
+
+        List<String> list2 = Arrays.asList("https://pic3.58cdn.com.cn/p1/big/n_v27f82a9ee3c1b43849d6422187d4c593b.jpg2");
+
+        list1.removeAll(list2);
+        System.out.println(list1);
+    }
+
+    @Test
     public void name() {
         String url = "http://www.baidu.com/atc?test=a";
         Pattern pattern = Pattern.compile("http.*?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\\.?");
