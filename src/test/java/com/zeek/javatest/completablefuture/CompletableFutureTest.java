@@ -50,13 +50,15 @@ public class CompletableFutureTest {
             return 4;
         });
 
-        CompletableFuture.allOf(c1, c2, c3, c4);
+        System.out.println("正在join. join的时间是最长的任务执行时间");
+        CompletableFuture.allOf(c1, c2, c3, c4).join();
+        System.out.println("结束join. ");
 
+        System.out.println("阻塞式顺序获取任务结果");
         System.out.println(c1.get());
         System.out.println(c2.get());
         System.out.println(c3.get());
         System.out.println(c4.get());
-
     }
 
     private static Shop shop = null;
