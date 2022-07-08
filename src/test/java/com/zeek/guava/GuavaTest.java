@@ -4,6 +4,8 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.util.concurrent.RateLimiter;
+
 import org.junit.Test;
 
 import java.util.Random;
@@ -15,6 +17,17 @@ import java.util.concurrent.TimeUnit;
  * Created on 2020-09-01
  */
 public class GuavaTest {
+
+    @Test
+    public void rateTest() {
+
+        RateLimiter limiter = RateLimiter.create(50.0); // 每秒不超过1个任务被提交
+        for (int i = 0; i < 1000; i++) {
+            double timeWaited = limiter.acquire(); // 请求RateLimiter, 超过permits会被阻塞
+            System.out.println("time waited: " + timeWaited);
+        }
+
+    }
 
     private final LoadingCache<String, String> loadingCache1 = CacheBuilder
             .newBuilder()
