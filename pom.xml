@@ -11,6 +11,7 @@
     <properties>
         <skipTests>true</skipTests>
         <kotlin.version>1.6.21</kotlin.version>
+        <mybatis-plus-extention-version>3.4.2</mybatis-plus-extention-version>
     </properties>
 
     <dependencies>
@@ -215,6 +216,22 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${mybatis-plus-dynamic-verion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>${mybatis-plus-extention-version}</version>
         </dependency>
 
     </dependencies>
