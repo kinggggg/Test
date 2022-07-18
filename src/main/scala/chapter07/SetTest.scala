@@ -11,6 +11,8 @@ object SetTest {
   def main(args: Array[String]): Unit = {
     val set = Set(1, 2, 3)
     println(set)
+    // class scala.collection.immutable.Set$Set3
+    println(set.getClass)
 
     // 数据不可重复
     val set1 = Set(1, 1, 2, 3)
