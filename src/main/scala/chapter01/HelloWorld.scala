@@ -1,4 +1,4 @@
-package chaperter01
+package chapter01
 
 /**
  * object: 声明一个单例对象(伴生对象)

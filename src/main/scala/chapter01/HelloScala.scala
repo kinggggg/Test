@@ -1,4 +1,4 @@
-package chaperter01
+package chapter01
 
 object HelloScala {
   def main(args: Array[String]): Unit = {
