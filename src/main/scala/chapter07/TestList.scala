@@ -38,5 +38,43 @@ object TestList {
     // 获取指定的数据
     println(list4(1))
 
+    println("====================")
+    println("list5 = " + list5)
+    // 集合初始化数据,不包含最后一个
+    println("list5 init " + list5.init)
+    println("list5 take(3) " + list5.take(3))
+    println("list5 takeRight(3) " + list5.takeRight(3))
+    // 第一个参数是size, 第二个参数是step
+    val s1 = list5.sliding(2, 1)
+    s1.foreach(println)
+
+    val list6: List[Int] = List(1, 2, 3)
+    // 求和
+    println(list6.sum)
+    // 乘积
+    println(list6.product)
+    // 最大值
+    println(list6.max)
+    // 最小值
+    println(list6.min)
+    // 排序
+    // 按照元素大小排序
+    println("按照元素大小排序: " + list6.sortBy(x => x))
+    // 按照元素大小升序排序
+    println("按照元素大小升序排序: " + list.sortWith((x, y) => x < y))
+
+    // 集合计算高级函数
+    val listAdvanced: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    val nestedListAdvanced: List[List[Int]] = List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9))
+    val wordList: List[String] = List("hello world", "hello atguigu", "hello scala")
+    println("filter = " + listAdvanced.filter(x => x % 2 == 0))
+    println("map = " + listAdvanced.map(x => x + 1))
+    println("flat = " + nestedListAdvanced.flatten)
+    // 扁平化+映射
+    println("flatMap = " + wordList.flatMap(x => x.split(" ")))
+    // 分组
+    println(listAdvanced.groupBy(x => x % 2))
+    // 归约 reduce
+    println(listAdvanced.reduce((x, y) => x + y))
   }
 }
