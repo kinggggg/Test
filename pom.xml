@@ -234,6 +234,13 @@
             <version>${mybatis-plus-extention-version}</version>
         </dependency>
 
+        <!-- Scala 2.13之后，并行集合模块变成了外部库，直接像Scala 2.12那样写并行集合计算代码，IDE会报“Cannot resolve symbol par” -->
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-parallel-collections_2.13</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
