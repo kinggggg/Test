@@ -8,6 +8,8 @@ object TestFunction {
     val date = new Date()
     println(date)
     println()
+    // 函数没有重载和重写的概念, 程序报错
+
 
     printf("=========== %s ===============", "函数赋值为变量")
     println()
