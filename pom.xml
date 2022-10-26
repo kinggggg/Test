@@ -241,10 +241,19 @@
             <version>0.2.0</version>
         </dependency>
 
+        <!-- redis 客户端 -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>3.17.5</version>
+        </dependency>
+
+        <!-- 表达式求值框架 -->
+        <!-- https://mvnrepository.com/artifact/com.googlecode.aviator/aviator -->
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>5.3.1</version>
         </dependency>
 
     </dependencies>
