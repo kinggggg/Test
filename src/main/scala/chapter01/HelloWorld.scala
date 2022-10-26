@@ -38,6 +38,12 @@ object HelloWorld {
     println(b)
 
     println("============================")
+    var age: Int = 19;
+    val res: Any = if (age < 18) "童年" else "成年"
+    "不起作用"
+    println(res)
+
+    println("============================")
     // 函数作为参数传递
     def f1(f: (Int, Int) => Int): Int = {
       f(2, 4)
