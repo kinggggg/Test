@@ -1,8 +1,17 @@
 package chapter05
 
+import java.util.Date
+
 object TestFunction {
 
   def main(args: Array[String]): Unit = {
+    val date = new Date()
+    println(date)
+    println()
+
+    printf("=========== %s ===============", "函数赋值为变量")
+    println()
+    // 将函数赋值给一个变量
     var f1 = foo
     // 在被调用函数的后面加上 _ 表明把整个函数体赋值给变量
     var f2 = foo _
