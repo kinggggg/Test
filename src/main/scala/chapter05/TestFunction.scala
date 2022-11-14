@@ -26,7 +26,7 @@ object TestFunction {
     printf("=========== %s ===============", "函数赋值为变量")
     println()
     println("*******************1")
-    // 将函数赋值给一个变量
+    // 将函数赋值给一个变量. 根据第8条, 调用时可以省略小括号
     var f1 = foo
     println(f1)
     println("*******************2")
@@ -50,10 +50,48 @@ object TestFunction {
     foo2(f())
 
     printf("=========== %s ===============", "Scala如果期望是无返回值类型, 可以省略等号")
+    println()
     def f6() {
       "hanshu6"
     }
+
+    println("*******************5")
+    // 控制抽象
+
+    // 输出如下
+    //f...
+    //10
+    //f...
+    //10
+    //def ff = () => {
+    //  println("f...")
+    //  10
+    //}
+    //fooo(ff())
+    //
+    //def fooo(a: =>Int): Unit = {
+    //  println(a)
+    //  println(a)
+    //}
+
+    // 输出如下
+    //f...
+    //10
+    //10
+    def ff = () => {
+      println("f...")
+      10
+    }
+    fooo(ff())
+
+    def fooo(a: Int): Unit = {
+      println(a)
+      println(a)
+    }
+
   }
+
+
 
   def foo(): Int = {
     println("foo")
