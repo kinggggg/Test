@@ -25,13 +25,21 @@ object TestFunction {
 
     printf("=========== %s ===============", "函数赋值为变量")
     println()
+    println("*******************1")
     // 将函数赋值给一个变量
     var f1 = foo
+    println(f1)
+    println("*******************2")
     // 在被调用函数的后面加上 _ 表明把整个函数体赋值给变量
     var f2 = foo _
+    println(f2)
+    println("*******************3")
     var f3: () => Int = foo _
+    println(f3)
+    println("*******************4")
     // 如果明确了变量的类型, _ 可以省略
     var f4: () => Int = foo
+    println(f4)
 
     printf("=========== %s ===============", "把代码传递过去")
     println()
@@ -48,7 +56,7 @@ object TestFunction {
   }
 
   def foo(): Int = {
-    print("foo")
+    println("foo")
     1
   }
 
