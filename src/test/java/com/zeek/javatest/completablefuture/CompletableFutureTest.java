@@ -15,6 +15,16 @@ import org.junit.Test;
 public class CompletableFutureTest {
 
     @Test
+    public void thread_exception_test() {
+
+        new Thread(() -> {
+            System.out.println("aaa");
+        }).start();
+
+
+    }
+
+    @Test
     public void name3() throws ExecutionException, InterruptedException {
 
         CompletableFuture<Integer> c1 = CompletableFuture.supplyAsync(() -> {
