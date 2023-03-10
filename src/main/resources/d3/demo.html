@@ -8,7 +8,8 @@
 <p>Pear</p>
 <p>Banana</p> -->
 
-
+<svg>
+</svg>
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
@@ -27,7 +28,27 @@
   //     .append("svg")          //添加一个svg元素
   //     .attr("width", width)       //设定宽度
   //     .attr("height", height);    //设定高度
+  var dataset = [ 250 , 210 , 170 , 130 , 90 ];  //数据（表示矩形的宽度）
+  var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
 
+  var svg = d3.select("svg")
+  svg.selectAll("rect")
+          .data(dataset)
+          .enter()
+          .append("rect")
+          .attr("x",20)
+          .attr("y",function(d,i){
+            return i * rectHeight;
+          })
+          .attr("width",function(d){
+            return d;
+          })
+          .attr("height",rectHeight-2)
+          .attr("fill","steelblue");
+  // svg.selectAll("rect")   //选择svg内所有的矩形
+  //         .data(dataset)  //绑定数组
+  //         .enter()        //指定选择集的enter部分
+  //         .append("rect") //添加足够数量的矩形元素
 
 </script>
 
