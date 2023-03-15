@@ -12,6 +12,15 @@ object HelloWorld {
     println("Hello World")
     System.out.println("Hello World")
 
+    val sqlStr =
+      s"""
+         | SELECT *
+         | FROM
+         | WHERE auth_state = '1' AND
+         |""".stripMargin
+
+    println(sqlStr)
+
     // 5. 空类型
     // 5.1 空值Unit
     def m1(): Unit = {
