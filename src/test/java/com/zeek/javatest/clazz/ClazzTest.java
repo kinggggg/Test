@@ -11,7 +11,10 @@ import org.junit.Test;
  **/
 public class ClazzTest {
 
-
+    @Test
+    public void name() {
+        System.out.println("aa" + null);
+    }
 
     @Test
     public void test02() {
