@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,22 @@ import com.google.common.base.Stopwatch;
  * Created by weibo_li on 2017/4/25.
  */
 public class DateTest {
+
+    @Test
+    public void utcTest() throws ParseException {
+        dateToUtc(new Date());
+    }
+
+    public void dateToUtc(Date date) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        SimpleDateFormat sdfutc = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdfutc.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        sdfutc.setTimeZone(TimeZone.getTimeZone("GMT"));
+        System.out.println("北京时间: " + sdf.format(date));
+        System.out.println("北京时间: " + sdf.parse(sdf.format(date)).getTime());
+        System.out.println("UTC时间: " + sdfutc.format(date));
+        System.out.println("UTC时间: " + sdfutc.parse(sdfutc.format(date)).getTime());
+    }
 
     @Test
     public void stopWatch() throws InterruptedException {
@@ -112,7 +129,7 @@ public class DateTest {
         System.out.println("----------3");
         System.out.println();
 
-        
-        
+
+
     }
 }

@@ -11,6 +11,21 @@ import org.junit.Test;
 public class JunitTest {
 
     @Test
+    public void test2() {
+        whileTurn();
+    }
+
+    public String whileTurn() {
+
+        while (true) {
+            System.out.println("1");
+            return "2" ;
+        }
+
+
+    }
+
+    @Test
     public void testAssert() {
 
 //        Assert.assertNull(null);

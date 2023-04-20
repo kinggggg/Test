@@ -1,5 +1,6 @@
 package com.zeek.javatest.completablefuture;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
@@ -12,6 +13,152 @@ import org.junit.Test;
  * Created by weibo_li on 2017/2/14.
  */
 public class CompletableFutureTest {
+
+    @Test
+    public void thread_exception_test() {
+
+        new Thread(() -> {
+            System.out.println("aaa");
+        }).start();
+
+
+    }
+
+    @Test
+    public void name3() throws ExecutionException, InterruptedException {
+
+        CompletableFuture<Integer> c1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep1");
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 1;
+        });
+        CompletableFuture<Integer> c2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep2");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 2;
+        });
+        CompletableFuture<Integer> c3 = CompletableFuture.supplyAsync(() -> {
+            {
+                try {
+                    System.out.println("sleep3");
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                return 3;
+            }
+        });
+        CompletableFuture<Integer> c4 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep4");
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 4;
+        });
+
+        List<CompletableFuture<Integer>> list = new ArrayList<>();
+        list.add(c1);
+        list.add(c2);
+        list.add(c3);
+        list.add(c4);
+
+        System.out.println("正在join. join的时间是最长的任务执行时间");
+        CompletableFuture.allOf(list.toArray(new CompletableFuture[0]))
+                .thenApply(it -> {
+                    System.out.println(it);
+                    List<Integer> collect = list.stream().map(ele -> {
+                        System.out.println("ele=" + ele);
+                        return ele.join();
+                    }).collect(Collectors.toList());
+                    System.out.println("collect" + collect);
+                    return collect;
+                })
+                .join();
+        System.out.println("结束join. ");
+
+        System.out.println("阻塞式顺序获取任务结果");
+        System.out.println(c1.get());
+        System.out.println(c2.get());
+        System.out.println(c3.get());
+        System.out.println(c4.get());
+    }
+
+    @Test
+    public void name2() throws ExecutionException, InterruptedException {
+
+        CompletableFuture<Integer> c1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep1");
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 1;
+        });
+        CompletableFuture<Integer> c2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep2");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 2;
+        });
+        CompletableFuture<Integer> c3 = CompletableFuture.supplyAsync(() -> {
+            {
+                try {
+                    System.out.println("sleep3");
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                return 3;
+            }
+        });
+        CompletableFuture<Integer> c4 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("sleep4");
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            return 4;
+        });
+
+        List<CompletableFuture<Integer>> list = new ArrayList<>();
+        list.add(c1);
+        list.add(c2);
+        list.add(c3);
+        list.add(c4);
+
+        System.out.println("正在join. join的时间是最长的任务执行时间");
+        CompletableFuture.allOf(list.toArray(new CompletableFuture[0])).join();
+        System.out.println("结束join. ");
+
+        System.out.println("阻塞式顺序获取任务结果");
+        System.out.println(c1.get());
+        System.out.println(c2.get());
+        System.out.println(c3.get());
+        System.out.println(c4.get());
+    }
 
     @Test
     public void name() throws ExecutionException, InterruptedException {

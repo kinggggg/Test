@@ -1,4 +1,4 @@
-package chaperter01
+package chapter01
 
 /**
  * object: 声明一个单例对象(伴生对象)
@@ -11,6 +11,15 @@ object HelloWorld {
      */
     println("Hello World")
     System.out.println("Hello World")
+
+    val sqlStr =
+      s"""
+         | SELECT *
+         | FROM
+         | WHERE auth_state = '1' AND
+         |""".stripMargin
+
+    println(sqlStr)
 
     // 5. 空类型
     // 5.1 空值Unit
@@ -36,6 +45,12 @@ object HelloWorld {
     }
     val b = m2(0)
     println(b)
+
+    println("============================")
+    var age: Int = 19;
+    val res: Any = if (age < 18) "童年" else "成年"
+    "不起作用"
+    println(res)
 
     println("============================")
     // 函数作为参数传递
