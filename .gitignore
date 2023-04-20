@@ -7,4 +7,4 @@ test.iml
 .project
 .settings/
 .vscode/
-
+.metals/
