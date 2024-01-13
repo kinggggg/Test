@@ -1,12 +1,20 @@
 package com.zeek.javatest.collection.arraylist;
 
-import com.zeek.javatest.domain.User;
-import org.junit.Test;
-import org.springframework.util.StringUtils;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.junit.Test;
+
+import com.zeek.javatest.domain.User;
 
 /**
  * Created by weibo_li on 2017/4/25.

@@ -11,8 +11,8 @@ object HelloScala {
     var a: String = null
     println(a)
     // 将Scala null值赋值给一个Long类型变量
-    var b: Long = null
-    println(b)
+    //var b: Long = null
+    //println(b)
 
 
   }
