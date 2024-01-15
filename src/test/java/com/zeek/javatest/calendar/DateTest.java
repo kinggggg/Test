@@ -34,38 +34,21 @@ public class DateTest {
     public void dateToUtc(Date date) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         SimpleDateFormat sdfutc = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        sdfutc.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        TimeZone utc = TimeZone.getTimeZone("UTC");
+        sdfutc.setTimeZone(utc);
+
 //        sdfutc.setTimeZone(TimeZone.getTimeZone("GMT"));
         System.out.println("北京时间: " + sdf.format(date));
         System.out.println("北京时间: " + sdf.parse(sdf.format(date)).getTime());
         System.out.println("UTC时间: " + sdfutc.format(date));
         System.out.println("UTC时间: " + sdfutc.parse(sdfutc.format(date)).getTime());
-    }
+        System.out.println("----------");
+        Instant now = Instant.now();
+        System.out.println("Instant.now() 默认是utc时间" + Instant.now());
+        TimeZone shanghai = TimeZone.getTimeZone("Asia/Shanghai");
+        System.out.println("Instant.now() 转换成上海时间" + Instant.now().atZone(shanghai.toZoneId()));
 
-    @Test
-    public void stopWatch() throws InterruptedException {
-        Stopwatch stopwatch = Stopwatch.createStarted();
-
-        System.out.println("11111");
-        Thread.sleep(1000);
-        System.out.println(stopwatch.elapsed(TimeUnit.SECONDS));
-
-        System.out.println("22222");
-        Thread.sleep(2000);
-        System.out.println(stopwatch.elapsed(TimeUnit.SECONDS));
-        stopwatch.stop();
-
-    }
-
-
-    @Test
-    public void sort() {
-        Set<Integer> ids = new HashSet<>();
-        ids.add(12);
-        ids.add(10);
-        ids.add(13);
-        List<Integer> collect = ids.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        System.out.println(StringUtils.join(collect, ","));
     }
 
     @Test
