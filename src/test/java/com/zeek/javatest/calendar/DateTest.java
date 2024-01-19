@@ -7,19 +7,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-
-import com.google.common.base.Stopwatch;
 
 /**
  * Created by weibo_li on 2017/4/25.
@@ -44,10 +35,17 @@ public class DateTest {
         System.out.println("UTC时间: " + sdfutc.format(date));
         System.out.println("UTC时间: " + sdfutc.parse(sdfutc.format(date)).getTime());
         System.out.println("----------");
+        /**
+         * Instant.now() 默认是utc时间2024-01-15T07:07:00.082Z
+         * Instant.now() 转换成上海时间,带时区信息2024-01-15T15:07:00.082+08:00[Asia/Shanghai]
+         * Instant.now() 转换成上海时间,不带时区信息2024-01-15T15:07:00.082
+         */
         Instant now = Instant.now();
-        System.out.println("Instant.now() 默认是utc时间" + Instant.now());
+        System.out.println("Instant.now() 默认是utc时间" + now);
         TimeZone shanghai = TimeZone.getTimeZone("Asia/Shanghai");
-        System.out.println("Instant.now() 转换成上海时间" + Instant.now().atZone(shanghai.toZoneId()));
+        ZonedDateTime zonedDateTimeOfShanghai = now.atZone(shanghai.toZoneId());
+        System.out.println("Instant.now() 转换成上海时间,带时区信息" + zonedDateTimeOfShanghai);
+        System.out.println("Instant.now() 转换成上海时间,不带时区信息" + zonedDateTimeOfShanghai.toLocalDateTime());
 
     }
 
