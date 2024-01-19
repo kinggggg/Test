@@ -1,19 +1,24 @@
-package com.zeek.javatest.map;
+package com.zeek.javatest.integer;
 
-import com.zeek.javatest.collection.arraylist.Person;
 import org.junit.Test;
 
-import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.zeek.javatest.collection.arraylist.Person;
 
 /**
- * Created by weibo_li on 2017/4/10.
+ * Created by weibo_li on 2016/12/28.
  */
-public class MapTest {
+public class JavaTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void computeIfAbsent_test() {
         Map<String, HashSet<String>> map1 = new HashMap<>();
         // computeIfAbsent方法：判断Map中是否存在值为fruits的key，若不存在的话，以fruits为key以genValue函数
         // 的返回值value放入到Map中；若Map中之前存在key为fruits的话，直接使用对应的value
@@ -23,7 +28,10 @@ public class MapTest {
         map1.computeIfAbsent("fruits", k -> genValue(k)).add("banana");
         map1.computeIfAbsent("fruits", k -> genValue(k)).add("water");
         System.out.println(map1);
+    }
 
+    static HashSet<String> genValue(String str) {
+        return new HashSet<String>();
     }
 
     @Test
@@ -64,10 +72,6 @@ public class MapTest {
 
     }
 
-    static HashSet<String> genValue(String str) {
-        return new HashSet<String>();
-    }
-
     @Test
     public void test() {
         Map<String, Map<String, String>> certificationOrganizationCodeMap = new HashMap<>();
@@ -90,19 +94,31 @@ public class MapTest {
     }
 
     @Test
-    public void test01() {
+    public void integer_equals_test() {
+        Integer i = 127;
+        Integer j = 127;
+        if(i==j){
+            System.out.println("i==j is equal");
+        }else {
+            System.out.println("i==j is not equal");
+        }
+    }
 
-        Map<Person, Integer> items = new HashMap<>();
-        items.put(new Person(1, "zhangsan"), 10);
-        items.put(new Person(2, "lisi"), 20);
 
-        items.forEach((k, v) -> {
-            k.age = k.age + 1;
+    @Test
+    public void getAndUpdate_test() {
+        AtomicInteger atomicInteger = new AtomicInteger(20);
+
+//        int i = atomicInteger.addAndGet(5);
+//        System.out.println(i);
+//
+//        int i1 = atomicInteger.accumulateAndGet(20, Integer::max);
+//        System.out.println(i1);
+
+        int andUpdate = atomicInteger.getAndUpdate(i -> {
+            return 30;
         });
-
-        items.forEach((k, v) -> {
-            System.out.println("k = " + k + "   ||   v = " +  v);
-        });
-
+        System.out.println(andUpdate);
+        System.out.println(atomicInteger);
     }
 }
