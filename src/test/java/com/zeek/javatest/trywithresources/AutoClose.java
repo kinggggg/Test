@@ -28,6 +28,7 @@ public class AutoClose implements AutoCloseable {
         }
     }
 }
+
 class MyException extends Exception {
 
     public MyException() {

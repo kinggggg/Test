@@ -17,7 +17,7 @@ public class TransientTest implements Externalizable {
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
-        //out.writeObject(content);
+        out.writeObject(content);
     }
 
     @Override
