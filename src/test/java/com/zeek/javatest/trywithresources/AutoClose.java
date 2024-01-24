@@ -24,7 +24,10 @@ public class AutoClose implements AutoCloseable {
         try (AutoClose autoClose = new AutoClose()) {
             autoClose.work();
         } catch (MyException e) {
+            System.out.println("catch MyException");
             e.printStackTrace();
+        }finally {
+            System.out.println("finally");
         }
     }
 }
