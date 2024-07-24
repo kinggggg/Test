@@ -1,1 +1,1 @@
-test revert
+学习JavaScript、ES6和TypeScript
