@@ -18,6 +18,7 @@ public class FlowDemo {
         // 1、定义一个发布者； 发布数据
         SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
 
+        // 2、定义一个中间操作
 
         // 2、定义一个订阅者； 订阅感兴趣的数据
         Flow.Subscriber<String> subscriber = new Flow.Subscriber<String>() {
@@ -62,60 +63,9 @@ public class FlowDemo {
                 System.out.println(Thread.currentThread().getName() + ",完成了");
             }
         };
-        // 再定义一个订阅者；并且这个订阅者消费数据慢
-        Flow.Subscriber<String> subscriber2 = new Flow.Subscriber<String>() {
-
-            private Flow.Subscription subscription;
-
-            // 在订阅时 onXxxx: 在xxx事件发生时，执行这个回调
-            @Override
-            public void onSubscribe(Flow.Subscription subscription) {
-                System.out.println(">>>,订阅开始了" + subscription);
-                this.subscription = subscription;
-
-                // 订阅完成后，马上从上游请求一个数据
-                this.subscription.request(1);
-            }
-
-            // 在下一个元素到达时； 执行这个回调； 接受到了新数据
-            @Override
-            public void onNext(String item) {
-                System.out.println(">>>,接收到新数据：" + item);
-
-                this.subscription.request(1);
-
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                // 也可以在指定的时机取消订阅
-//                if (item.equals("p-7")) {
-//                    this.subscription.cancel();
-//                } else {
-//                    // 继续从上游请求一个数据
-//                    this.subscription.request(1);
-//                }
-            }
-
-            // 在错误发生时
-            @Override
-            public void onError(Throwable throwable) {
-                System.out.println(">>>,发生了错误：" + throwable.getMessage());
-            }
-
-            // 在完成时
-            @Override
-            public void onComplete() {
-                System.out.println(">>>,完成了");
-            }
-        };
 
         // 3、绑定发布者和订阅者的关系
         publisher.subscribe(subscriber);
-        publisher.subscribe(subscriber2);
-
 
         System.out.println(Thread.currentThread().getName() + "发布数据的线程");
         // 发布数据
