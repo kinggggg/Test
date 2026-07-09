@@ -1,0 +1,133 @@
+package com.zeek.javatest.flow;
+
+import java.util.concurrent.Flow;
+import java.util.concurrent.SubmissionPublisher;
+
+public class FlowDemo3 {
+
+    static class MyProcessor extends SubmissionPublisher<String> implements Flow.Processor<String,String> {
+
+        private Flow.Subscription subscription;
+
+        @Override
+        public void onSubscribe(Flow.Subscription subscription) {
+            System.out.println("processor订阅绑定完成");
+            this.subscription = subscription;
+            this.subscription.request(1); // 找上游获取一个数据
+        }
+
+        // 数据到达
+        @Override
+        public void onNext(String item) {
+            System.out.println("processor拿到数据" + item);
+            // 再加工
+            item += "哈哈 ";
+            // 把加工后的数据发送出去
+            submit(item);
+            subscription.request(1); // 再要新数据
+        }
+
+        @Override
+        public void onError(Throwable throwable) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    }
+
+    /**
+     * 1、Publisher（发布者）：发布数据的对象
+     * 2、Subscriber（订阅者）：订阅数据的对象
+     * 3、Subscription（订阅关系）：发布者和订阅者之间的订阅关系
+     * 4、Processor（处理器）：既是发布者又是
+     *
+     * @param args
+     */
+    public static void main(String[] args) throws InterruptedException {
+        // 1、定义一个发布者； 发布数据
+        SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
+
+        // 2、定义一个中间操作
+        MyProcessor myProcessor = new MyProcessor();
+        MyProcessor myProcessor2 = new MyProcessor();
+        MyProcessor myProcessor3 = new MyProcessor();
+
+        // 3、定义一个订阅者； 订阅感兴趣的数据
+        Flow.Subscriber<String> subscriber = new Flow.Subscriber<String>() {
+
+            private Flow.Subscription subscription;
+
+            // 在订阅时 onXxxx: 在xxx事件发生时，执行这个回调
+            @Override
+            public void onSubscribe(Flow.Subscription subscription) {
+                System.out.println(Thread.currentThread().getName() + ",订阅开始了" + subscription);
+                this.subscription = subscription;
+
+                // 订阅完成后，马上从上游请求一个数据
+                this.subscription.request(1);
+            }
+
+            // 在下一个元素到达时； 执行这个回调； 接受到了新数据
+            @Override
+            public void onNext(String item) {
+                System.out.println(Thread.currentThread().getName() + ",接收到新数据：" + item);
+
+                this.subscription.request(1);
+
+                // 也可以在指定的时机取消订阅
+//                if (item.equals("p-7")) {
+//                    this.subscription.cancel();
+//                } else {
+//                    // 继续从上游请求一个数据
+//                    this.subscription.request(1);
+//                }
+            }
+
+            // 在错误发生时
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println(Thread.currentThread().getName() + ",发生了错误：" + throwable.getMessage());
+            }
+
+            // 在完成时
+            @Override
+            public void onComplete() {
+                System.out.println(Thread.currentThread().getName() + ",完成了");
+            }
+        };
+
+        // 4、绑定发布者和订阅者的关系
+        publisher.subscribe(myProcessor); // 此时处理器相当于订阅者
+        myProcessor.subscribe(myProcessor2); // 此时处理器相当于发布者
+        myProcessor2.subscribe(myProcessor3);
+        myProcessor3.subscribe(subscriber);
+        // !!!绑定操作：就是发布者记住了所有订阅者都有谁，有数据后，给所有的订阅者把数据都推送过去
+
+        System.out.println(Thread.currentThread().getName() + "发布数据的线程");
+        // 发布数据
+        for (int i = 0; i < 10; i++) {
+
+            publisher.submit("p-" + i);
+
+//            if (i >= 9) {
+//                // 当发布者异常了后，会触发订阅者的onError回调
+//                publisher.closeExceptionally(new RuntimeException("发布者异常了"));
+//            } else {
+//                publisher.submit("p-" + i);
+//            }
+            // publisher 发布的所有数据在它的buffer区（其实是一个数组）
+        }
+
+        //
+        publisher.close();
+
+        // JVM对于整个发布订阅关系做好了 异步+缓存区处理 = 响应式系统
+
+
+        Thread.sleep(200_000);
+
+    }
+}
